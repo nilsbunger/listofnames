@@ -2,6 +2,7 @@
 var React = require('react');
 var NameStore = require('./NameStore.jsx');
 var NameList = require('./NameList.jsx');
+var WebApi = require('./WebApiUtils.jsx');
 
 // import {render} from 'react-dom';
 
@@ -12,8 +13,7 @@ function getNameState() {
   };
 }
 
-//class App extends React.Component {
-
+// Top-level component which holds state. State goes thru properties to children.
 var App = React.createClass({
 
     getInitialState: function() {
@@ -27,16 +27,16 @@ var App = React.createClass({
     // attach / remove listener for changes in the Store
     componentDidMount: function() {
         NameStore.addChangeListener(this._onChange);
+        WebApi.getNames();  // kick off an initial AJAX call
     },
 
     componentWillUnmount: function() {
         NameStore.removeChangeListener(this._onChange);
     },
 
-
     render () {
       return (<div>
-            <p> Hello React3!</p>
+            <p> Hello React!</p>
             <NameList allNames={this.state.allNames} nameCount={this.state.nameCount} />
         </div>
       );

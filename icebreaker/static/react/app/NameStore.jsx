@@ -9,24 +9,24 @@ var NameConstants = require('./NameConstants.jsx');
 // event emitted by this Store:
 var CHANGE_EVENT = 'change';
 
-var _names = {};
+var _names = [];
 
 var NameStore = assign({}, EventEmitter.prototype, {
 
+    // the Store could be smart and make a web api request call if it doesn't have any data,
+    // which will ultimately result in a NAME_ADD event coming back.
 
     getAll: function() {
         return _names;
     },
 
     getNameCount: function() {
-        return Object.keys(_names).length;  // inefficient O(n)
+        return _names.length;
     },
-
 
     emitChange: function() {
         this.emit(CHANGE_EVENT);
     },
-
 
     //
     addChangeListener: function(callback) {
@@ -46,7 +46,7 @@ AppDispatcher.register(function(action) {
     var text;
     switch(action.actionType) {
         case NameConstants.NAME_ADD:
-            console.log("TODO: store the added name here");
+            _names = _names.concat(action.data);    // concat the two lists
             NameStore.emitChange();
             break;
         default:
