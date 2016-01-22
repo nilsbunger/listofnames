@@ -4,13 +4,26 @@ var NameConstants = require('./NameConstants.jsx');
 
 var WebApi = {
     getNames: function() {
-        j.get('/api/names')
+        j.ajax({
+            type:"GET", 
+            url: "/names/", 
+            headers: {
+                'Authorization': "Basic " + btoa("admin:123456789r")
+            },
+            success: function() {
+            }
+        })
             .done(this._handleAjaxResponse)
             .fail(this._handleAjaxFail);
     },
     _handleAjaxResponse: function(resp) {
         console.log(resp);
-        AppDispatcher.dispatch(NameConstants.NAME_ADD, resp);
+        var name_list = [];
+        for ( var i=0 ; i < resp["results"].length; i++) {
+            name_list.push(resp["results"][i]["the_name"]);
+        }
+        console.log(name_list);
+        AppDispatcher.dispatch({actionType: NameConstants.NAME_ADD, data: name_list });
     },
 
     _handleAjaxFail: function(resp) {

@@ -1,2 +1,4 @@
 *db.sqlite3
 *.pyc
+icebreaker/static/react/node_modules
+icebreaker/static/react/public
