@@ -1,5 +1,15 @@
 python manage.py loaddata initial_data.json
 
+-------
+
+NODEJS Env
+
+You may need to:
+> pip install nodeenv
+> nodeenv -p 
+
+now you should have npm
+
 cd icebreaker/static/react
 npm install
 npm run dev
