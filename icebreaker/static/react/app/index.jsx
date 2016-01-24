@@ -2,6 +2,7 @@
 var React = require('react');
 var NameStore = require('./NameStore.jsx');
 var NameList = require('./NameList.jsx');
+var Messages = require('./components/Messages.jsx');
 var WebApi = require('./WebApiUtils.jsx');
 
 // import {render} from 'react-dom';
@@ -37,6 +38,7 @@ var App = React.createClass({
     render () {
       return (<div>
             <p> Hello React!</p>
+            <Messages/>
             <NameList allNames={this.state.allNames} nameCount={this.state.nameCount} />
         </div>
       );

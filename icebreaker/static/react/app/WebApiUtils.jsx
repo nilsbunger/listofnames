@@ -4,35 +4,56 @@ var NameConstants = require('./NameConstants.jsx');
 
 var WebApi = {
     getNames: function() {
+        WebApi.makeAjaxCall('/names/', NameConstants.NAME_ADD);
+    },
+    getMessages: function() {
+        WebApi.makeAjaxCall('/messages/', NameConstants.MESSAGES_ADD);
+    },
+    submitMessage: function(msg) {
+        var _handleSubmitFail = function(resp) {
+            console.log("Fail post");
+            console.log(resp);
+        }
+        var _handleSubmitResponse = function(resp) {
+            console.log("Submit response:");
+            console.log(resp);
+        }
         j.ajax({
-            type:"GET", 
-            url: "/names/", 
+            type:"POST",
+            url: '/messages/',
+            data: msg,
             headers: {
                 'Authorization': "Basic " + btoa("admin:123456789r")
             },
             success: function() {
             }
         })
-            .done(this._handleAjaxResponse)
-            .fail(this._handleAjaxFail);
+            .done(_handleSubmitResponse)
+            .fail(_handleSubmitFail);
     },
-    _handleAjaxResponse: function(resp) {
-        console.log(resp);
-        var name_list = [];
-        for ( var i=0 ; i < resp["results"].length; i++) {
-            name_list.push(resp["results"][i]["the_name"]);
+    makeAjaxCall: function(url, actionType) {
+        var _handleAjaxResponse = function(resp) {
+            AppDispatcher.dispatch({actionType: actionType, data: resp["results"] });
+        };
+
+        var _handleAjaxFail = function(resp) {
+            console.log("Fail GET:");
+            console.log(resp);
+
         }
-        console.log(name_list);
-        AppDispatcher.dispatch({actionType: NameConstants.NAME_ADD, data: name_list });
-    },
-
-    _handleAjaxFail: function(resp) {
-        console.log("Fail: faking real content returned from server");
-        console.log(resp);
-        // TODO: for now, pretend it worked... stuff a fake response into the dispatcher
-        AppDispatcher.dispatch({actionType: NameConstants.NAME_ADD, data:['bob', 'sally']});
-
+        j.ajax({
+            type:"GET",
+            url: url,
+            headers: {
+                'Authorization': "Basic " + btoa("admin:123456789r")
+            },
+            success: function() {
+            }
+        })
+            .done(_handleAjaxResponse)
+            .fail(_handleAjaxFail);
     }
+
 };
 
 module.exports = WebApi;

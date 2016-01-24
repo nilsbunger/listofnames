@@ -23,6 +23,7 @@ from listofnames import views
 router = routers.DefaultRouter()
 router.register(r'names', views.NameViewSet)
 router.register(r'users', views.UserViewSet)
+router.register(r'messages', views.MessageViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

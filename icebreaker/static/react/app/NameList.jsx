@@ -8,7 +8,9 @@ var NameList = React.createClass({
       return (
         <div>
             <ul>
-            {this.props.allNames.map(function(name) { return <li>{name}</li>;})}
+            {this.props.allNames.map(function(name) {
+                return <li key={name.id}>{name.the_name}</li>;})
+            }
             </ul>
             <p>There are a total of {this.props.nameCount} names</p>
         </div>
