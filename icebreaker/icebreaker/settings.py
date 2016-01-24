@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'listofnames.apps.ListofnamesConfig',
     'rest_framework',
+    'behave_django',
 ]
 
 
