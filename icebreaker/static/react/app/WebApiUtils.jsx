@@ -10,6 +10,7 @@ var WebApi = {
         WebApi.makeAjaxCall('/messages/', NameConstants.MESSAGES_ADD);
     },
     submitMessage: function(msg) {
+        // return a promise
         var _handleSubmitFail = function(resp) {
             console.log("Fail post");
             console.log(resp);
@@ -17,8 +18,10 @@ var WebApi = {
         var _handleSubmitResponse = function(resp) {
             console.log("Submit response:");
             console.log(resp);
+            WebApi.getMessages();   // reload messages from server (very inefficient, but good for
+                                    // now.
         }
-        j.ajax({
+        return j.ajax({
             type:"POST",
             url: '/messages/',
             data: msg,
