@@ -45,8 +45,6 @@ class MessageViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save()
-        print "HI"
-        pass
 
 
 

@@ -1,7 +1,7 @@
 
 var React = require('react');
-var NameStore = require('./NameStore.jsx');
-var NameList = require('./NameList.jsx');
+var NameStore = require('./stores/NameStore.jsx');
+var NameList = require('./components/NameList.jsx');
 var Messages = require('./components/Messages.jsx');
 var WebApi = require('./WebApiUtils.jsx');
 

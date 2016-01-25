@@ -7,7 +7,7 @@ var j = require('jquery');
 var Message = React.createClass({
 
     getInitialState: function() {
-        return {replyOpen: false, replySubmitPending: false, replyText: "Enter reply..."};
+        return {replyOpen: false, replySubmitPending: false, replyText: ""};
     },
 
     componentDidMount: function() {
@@ -49,7 +49,7 @@ var Message = React.createClass({
             }
             replyhtml = (<form onSubmit={this.handleSubmit}>
                 {errortext}
-                <textarea name="text" value={this.state.replyText}
+                <textarea name="text" value={this.state.replyText} placeholder="Reply here..."
                 onChange={this.handleReplyTextChange} />
                 <input type="text" hidden="true" name="in_reply_to" value={null} />
                 <input type="submit" value="Post" />
@@ -65,7 +65,7 @@ var Message = React.createClass({
             <b />
             <a href="javascript:void(0)" onClick={this.handleReplyClick}>
                 reply
-            </a> |
+            </a> | {" "}
             <a href="javascript:void(0)">like</a>
             <p></p>
             {replyhtml}
