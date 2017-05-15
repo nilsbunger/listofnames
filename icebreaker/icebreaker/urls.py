@@ -18,12 +18,12 @@ from django.contrib import admin
 
 
 from rest_framework import routers
-from listofnames import views
+from listofnames import views as listofnames_views
 
 router = routers.DefaultRouter()
-router.register(r'names', views.NameViewSet)
-router.register(r'users', views.UserViewSet)
-router.register(r'messages', views.MessageViewSet)
+router.register(r'names', listofnames_views.NameViewSet)
+router.register(r'users', listofnames_views.UserViewSet)
+router.register(r'messages', listofnames_views.MessageViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

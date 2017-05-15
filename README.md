@@ -34,6 +34,22 @@ Steps to set up dev:
 1. $ npm install
 1. $ npm run dev
 
+App structure
+=============
+
+Project
+* urls.py registers some views from listofnames to a django-rest-framework router.
+* settings.py instantiates listofnames app
+* static is wired to /static/ url. 
+
+Listofnames app
+* Renders the main index page from a template, using traditional urls.py in the app
+  directory
+* Implements django-rest-framework views, which are connected in the project urls.py
+
+icebreaker/static/react contains a react app, accessible at
+http://localhost:8000/static/react/index.html
+
 
 To test the REST API
 ==========
